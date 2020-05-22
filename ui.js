@@ -24,7 +24,7 @@ const UI = () => {
 				setLoading(false);
 			})
 			.catch((e) => {
-				console.log("Error", JSON.stringify(e, null, 2));
+				setLoading(false);
 			});
 	};
 

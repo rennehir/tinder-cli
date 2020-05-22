@@ -13,7 +13,7 @@ const getHeaders = () => {
 			};
 		})
 		.catch((e) => {
-			console.log("Error");
+			console.log("Not logged in");
 		});
 };
 
