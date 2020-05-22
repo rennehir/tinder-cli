@@ -11,10 +11,10 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	const [index, setIndex] = useState(0);
 
 	useInput((input, key) => {
-		if (input === prevKey && index < urls.length - 1) {
+		if (input === nextKey && index < urls.length - 1) {
 			setIndex(index + 1);
 		}
-		if (input === nextKey && index > 0) {
+		if (input === prevKey && index > 0) {
 			setIndex(index - 1);
 		}
 	});
