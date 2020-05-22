@@ -6,17 +6,24 @@ const PropTypes = require("prop-types");
 
 const ImageCarousel = importJsx("./image-carousel");
 
-const Profile = ({ profile }) => {
+const Person = ({ profile }) => {
 	return (
 		<>
-			<Text>{profile.name}</Text>
+			<Text>
+				{profile.name}, {calculateAge(profile.birth_date)}
+			</Text>
 			<ImageCarousel urls={profile.photos} prevKey="q" nextKey="w" />
+			<Text>{profile.bio}</Text>
 		</>
 	);
 };
 
-Profile.propTypes = {
+const calculateAge = (birthDate) => {
+	return new Date().getFullYear() - new Date(birthDate).getFullYear();
+};
+
+Person.propTypes = {
 	profile: PropTypes.object,
 };
 
-module.exports = Profile;
+module.exports = Person;
