@@ -5,7 +5,7 @@ const { Box, Text } = require("ink");
 const getHeaders = require("../utils/get-headers");
 const axios = require("../../src/axios");
 
-const Image = importJsx("../components/image");
+const ImageCarousel = importJsx("../components/image-carousel");
 
 const { useState, useEffect } = React;
 
@@ -36,7 +36,7 @@ const Feed = () => {
 			{recs && (
 				<>
 					<Text>{recs[0].name}</Text>
-					<Image url={recs[0].photos[0].url} />
+					<ImageCarousel urls={recs[0].photos} prevKey="q" nextKey="w" />
 					<Text>{recs.length}</Text>
 				</>
 			)}
