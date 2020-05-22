@@ -1,10 +1,13 @@
 "use strict";
 const React = require("react");
+const importJsx = require("import-jsx");
 const { Box, Text } = require("ink");
 const { Tabs, Tab } = require("ink-tab");
 
 const axios = require("../axios");
 const getHeaders = require("../utils/get-headers");
+
+const Person = importJsx("../components/person");
 
 const { useState, useEffect } = React;
 
@@ -45,15 +48,11 @@ const Matches = () => {
 					))}
 				</Tabs>
 				{activeTab && matches.length > 0 && (
-					<Person person={matches.find((m) => m._id === activeTab).person} />
+					<Person profile={matches.find((m) => m._id === activeTab).person} />
 				)}
 			</Box>
 		</Box>
 	);
-};
-
-const Person = ({ person }) => {
-	return person.name && <Text>{person.name}</Text>;
 };
 
 module.exports = Matches;
