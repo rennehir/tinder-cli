@@ -1,6 +1,11 @@
 "use strict";
 const React = require("react");
+const importJsx = require("import-jsx");
 const { Box, Text, useInput } = require("ink");
+
+const Feed = importJsx("./pages/feed");
+const Matches = importJsx("./pages/matches");
+const Profile = importJsx("./pages/profile");
 
 const { useState } = React;
 
@@ -23,9 +28,9 @@ const App = ({ profile }) => {
 
 	return (
 		<Box>
-			{currentPage === 1 && <Text>Feed</Text>}
-			{currentPage === 2 && <Text>Matches</Text>}
-			{currentPage === 3 && <Text>Profile</Text>}
+			{currentPage === 1 && <Feed />}
+			{currentPage === 2 && <Matches />}
+			{currentPage === 3 && <Profile />}
 		</Box>
 	);
 };
