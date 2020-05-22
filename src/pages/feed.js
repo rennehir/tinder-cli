@@ -5,7 +5,7 @@ const { Box, Text, useInput } = require("ink");
 const getHeaders = require("../utils/get-headers");
 const axios = require("../../src/axios");
 
-const ImageCarousel = importJsx("../components/image-carousel");
+const Person = importJsx("../components/person");
 
 const { useState, useEffect } = React;
 
@@ -18,12 +18,12 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get("/user/recs", { headers })
-			.then(result => {
+			.then((result) => {
 				setRecs(result.data.results);
 				setCurrRec(result.data.results[0]);
 				setLoading(false);
 			})
-			.catch(e => {
+			.catch((e) => {
 				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
@@ -32,14 +32,14 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get(`/pass/${currRec._id}`, { headers })
-			.then(result => {
+			.then((result) => {
 				if (result.status === 200) {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
 				}
 			})
-			.catch(e => {
+			.catch((e) => {
 				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
@@ -48,14 +48,14 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get(`/like/${currRec._id}`, { headers })
-			.then(result => {
+			.then((result) => {
 				if (result.status === 200) {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
 				}
 			})
-			.catch(e => {
+			.catch((e) => {
 				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
@@ -78,9 +78,7 @@ const Feed = () => {
 			{loading && <Text>Loading...</Text>}
 			{recs && currRec && (
 				<>
-					<Text>{currRec.name}</Text>
-					<Text>{currRec.bio}</Text>
-					<ImageCarousel urls={currRec.photos} prevKey="q" nextKey="w" />
+					<Person profile={currRec} />
 					<Text>"P to pass ||| L to like"</Text>
 				</>
 			)}
