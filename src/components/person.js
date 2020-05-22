@@ -8,13 +8,13 @@ const ImageCarousel = importJsx("./image-carousel");
 
 const Person = ({ profile }) => {
 	return (
-		<>
+		<Box flexDirection="column">
 			<Text>
 				{profile.name}, {calculateAge(profile.birth_date)}
 			</Text>
 			<ImageCarousel urls={profile.photos} prevKey="q" nextKey="w" />
 			<Text>{profile.bio}</Text>
-		</>
+		</Box>
 	);
 };
 
