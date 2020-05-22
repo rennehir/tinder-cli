@@ -19,12 +19,14 @@ const Feed = () => {
 		axios
 			.get("/user/recs", { headers })
 			.then((result) => {
-				setRecs(result.data.results);
-				setCurrRec(result.data.results[0]);
+				if (result.data.results) {
+					setRecs(result.data.results);
+					setCurrRec(result.data.results[0]);
+				}
 				setLoading(false);
 			})
 			.catch((e) => {
-				console.log("There's no one new around you.", e.message);
+				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
 

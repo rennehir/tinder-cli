@@ -35,7 +35,7 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 			<Box justifyContent="center">
 				{urls.map((val, ind) => {
 					return (
-						<Box width={3} justifyContent="center">
+						<Box key={ind} width={3} justifyContent="center">
 							<Text bold={ind == index}>o</Text>
 						</Box>
 					);
