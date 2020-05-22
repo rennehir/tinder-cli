@@ -20,15 +20,26 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	});
 
 	return (
-		<Box>
-			<Box width={3} justifyContent="center">
-				{index > 0 && <Text bold>{"<"}</Text>}
-			</Box>
+		<Box flexDirection="column" width={66}>
 			<Box>
-				<Image url={urls[index].processedFiles[1].url} />
+				<Box width={3} justifyContent="center">
+					{index > 0 && <Text bold>{"<"}</Text>}
+				</Box>
+				<Box>
+					<Image url={urls[index].processedFiles[1].url} />
+				</Box>
+				<Box width={3} justifyContent="center">
+					{index < urls.length - 1 && <Text bold>{">"}</Text>}
+				</Box>
 			</Box>
-			<Box width={3} justifyContent="center">
-				{index < urls.length - 1 && <Text bold>{">"}</Text>}
+			<Box justifyContent="center">
+				{urls.map((val, ind) => {
+					return (
+						<Box width={3} justifyContent="center">
+							<Text bold={ind == index}>o</Text>
+						</Box>
+					);
+				})}
 			</Box>
 		</Box>
 	);
