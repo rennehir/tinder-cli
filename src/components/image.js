@@ -8,13 +8,17 @@ const terminalArt = require("terminal-art");
 const Image = ({ url }) => {
 	const [content, setContent] = useState("Loading image...");
 
-	const img = terminalArt
-		.toAnsii(url, {
-			maxCharWidth: 60, // my terminal is only 20 characters wide
-		})
-		.then((data) => {
-			setContent(data);
-		});
+	try {
+		const img = terminalArt
+			.toAnsii(url, {
+				maxCharWidth: 60, // my terminal is only 20 characters wide
+			})
+			.then((data) => {
+				setContent(data);
+			});
+	} catch (error) {
+		setContent("Error in picture");
+	}
 
 	return <Box>{content}</Box>;
 };
