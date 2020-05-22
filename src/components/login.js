@@ -5,15 +5,15 @@ const { UncontrolledTextInput } = require("ink-text-input");
 
 const { useState } = React;
 
-const Login = ({ setLoggedIn }) => {
+const Login = ({ setLoggedIn, name }) => {
 	const [phone, setPhone] = useState("");
 	const [otp, setOtp] = useState("");
 
-	const handleSubmitPhone = (phone) => {
+	const handleSubmitPhone = phone => {
 		setPhone(phone);
 	};
 
-	const handleSubmitOTP = (otp) => {
+	const handleSubmitOTP = otp => {
 		setOtp(otp);
 		setTimeout(() => {
 			setLoggedIn(true);
@@ -26,7 +26,7 @@ const Login = ({ setLoggedIn }) => {
 				<>
 					<Box marginRight={1}>
 						<Text>
-							Hello, <Color green>Stranger</Color>! Login by entering your phone
+							Hello, <Color green>{name}</Color>! Login by entering your phone
 							number:
 						</Text>
 					</Box>

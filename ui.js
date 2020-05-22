@@ -16,16 +16,16 @@ const App = ({ name }) => {
 			Hello, <Color green>{name}</Color>
 		</Text>
 	) : (
-		<Login setLoggedIn={setIsLoggedIn} />
+		<Login name={name} setLoggedIn={setIsLoggedIn} />
 	);
 };
 
 App.propTypes = {
-	name: PropTypes.string,
+	name: PropTypes.string
 };
 
 App.defaultProps = {
-	name: "Stranger",
+	name: "Pussy"
 };
 
 module.exports = App;
