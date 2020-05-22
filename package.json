@@ -14,9 +14,11 @@
 		"ui.js"
 	],
 	"dependencies": {
+		"axios": "^0.19.2",
 		"import-jsx": "^4.0.0",
 		"ink": "^2.7.1",
 		"ink-text-input": "^3.2.2",
+		"jsonfile": "^6.0.1",
 		"meow": "^7.0.1",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1"
