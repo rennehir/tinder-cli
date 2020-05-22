@@ -18,13 +18,13 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get("/user/recs", { headers })
-			.then(result => {
+			.then((result) => {
 				setRecs(result.data.results);
 				setCurrRec(result.data.results[0]);
 				setLoading(false);
 			})
-			.catch(e => {
-				console.log("Error", JSON.stringify(e, null, 2));
+			.catch((e) => {
+				console.log("There's no one new around you.", e.message);
 			});
 	};
 
@@ -32,14 +32,14 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get(`/pass/${currRec._id}`, { headers })
-			.then(result => {
+			.then((result) => {
 				if (result.status === 200) {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
 				}
 			})
-			.catch(e => {
+			.catch((e) => {
 				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
@@ -48,14 +48,14 @@ const Feed = () => {
 		const headers = await getHeaders();
 		axios
 			.get(`/like/${currRec._id}`, { headers })
-			.then(result => {
+			.then((result) => {
 				if (result.status === 200) {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
 				}
 			})
-			.catch(e => {
+			.catch((e) => {
 				console.log("Error", JSON.stringify(e, null, 2));
 			});
 	};
