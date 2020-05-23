@@ -18,66 +18,88 @@ const Matches = ({ profile }) => {
 	const [pageIndex, setPageIndex] = useState(0);
 	const [activeTab, setActiveTab] = useState(null);
 	const [profileSwitcher, setProfileSwitcher] = useState("profile");
+	const [isListeningNavigation, setIsListeningNavigation] = useState(true);
+
+	const toggleNavigationListening = () => {
+		setIsListeningNavigation(!isListeningNavigation);
+	};
 
 	useEffect(() => {
-		const fetch = async () => {
-			const headers = await getHeaders();
-			axios
-				.post(
-					"/updates",
-					{ last_activity_date: "2019-01-01T00:00:00.000Z" },
-					{ headers }
-				)
-				.then(({ data }) => {
-					const pages = data.matches.reduce((resultArray, item, index) => {
-						const chunkIndex = Math.floor(index / 10);
-
-						if (!resultArray[chunkIndex]) {
-							resultArray[chunkIndex] = []; // start a new chunk
-						}
-
-						resultArray[chunkIndex].push(item);
-
-						return resultArray;
-					}, []);
-					setPages(pages);
-					setMatches(data.matches);
-					setActiveTab(data.matches[0]._id);
-				});
-		};
-		fetch();
+		getUpdates();
 	}, []);
+
+	const getUpdates = async (currentActiveTab) => {
+		const headers = await getHeaders();
+		axios
+			.post(
+				"/updates",
+				{ last_activity_date: "2019-01-01T00:00:00.000Z" },
+				{ headers }
+			)
+			.then(({ data }) => {
+				const pages = data.matches.reduce((resultArray, item, index) => {
+					const chunkIndex = Math.floor(index / 10);
+
+					if (!resultArray[chunkIndex]) {
+						resultArray[chunkIndex] = []; // start a new chunk
+					}
+
+					resultArray[chunkIndex].push(item);
+
+					return resultArray;
+				}, []);
+				setPages(pages);
+				setMatches(data.matches);
+				setActiveTab(currentActiveTab ? currentActiveTab : data.matches[0]._id);
+			});
+	};
 
 	const handleTabChange = (name) => {
 		setActiveTab(name);
 	};
 
 	useInput((input, key) => {
-		if (input === "m") {
-			// Enter messages
-			setProfileSwitcher("messages");
+		if (key.escape) {
+			toggleNavigationListening();
 		}
-		if (input === "p") {
-			// Go back to profile
-			setProfileSwitcher("profile");
-		}
+	});
 
-		if (input === "z") {
-			// Previous matches
-			if (pageIndex - 1 >= 0) {
-				setPageIndex(pageIndex - 1);
+	useInput((input, key) => {
+		if (isListeningNavigation) {
+			if (input === "m") {
+				// Enter messages
+				setProfileSwitcher("messages");
 			}
-		}
-		if (input === "x") {
-			// Next matches
-			if (pageIndex + 1 < pages.length) {
-				setPageIndex(pageIndex + 1);
+			if (input === "p") {
+				// Go back to profile
+				setProfileSwitcher("profile");
+			}
+
+			if (input === "z") {
+				// Previous matches
+				if (pageIndex - 1 >= 0) {
+					setPageIndex(pageIndex - 1);
+				}
+			}
+			if (input === "x") {
+				// Next matches
+				if (pageIndex + 1 < pages.length) {
+					setPageIndex(pageIndex + 1);
+				}
+			}
+			if (input === "r") {
+				// Get updates / refresh
+				getUpdates(activeTab);
 			}
 		}
 	});
 
 	return (
 		<Box flexDirection="column" margin={3}>
+			<Text>
+				Navigation is: {isListeningNavigation ? "on" : "off"}. Toggle by
+				pressing <Color red>ESC</Color>.
+			</Text>
 			<Text>Your matches</Text>
 			<Text>
 				Page {pageIndex + 1}/{pages.length}
@@ -111,8 +133,11 @@ const Matches = ({ profile }) => {
 							{profileSwitcher === "messages" && (
 								<Messages
 									profile={profile}
+									matchId={matches.find((m) => m._id === activeTab)._id}
 									match={matches.find((m) => m._id === activeTab).person}
 									messages={matches.find((m) => m._id === activeTab).messages}
+									refresh={getUpdates}
+									disableTextInput={isListeningNavigation}
 								/>
 							)}
 						</>
