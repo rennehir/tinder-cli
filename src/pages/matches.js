@@ -81,9 +81,6 @@ const Matches = ({ profile }) => {
 			<Text>
 				Page {pageIndex + 1}/{pages.length}
 			</Text>
-			{pages.length > 0 && (
-				<Text>{JSON.stringify(pages[0].length, null, 2)}</Text>
-			)}
 			<Box marginY={1}>
 				{pages.length > 0 && (
 					<Tabs
