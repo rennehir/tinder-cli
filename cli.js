@@ -8,15 +8,14 @@ const meow = require("meow");
 const ui = importJsx("./ui");
 
 const cli = meow(`
-	Usage
-    $ tinder-cli
+	Install
+		$ npm i -g @rennehir/tinder-cli
 
-	Options
-		--name  Your name
+	Usage
+		$ tinder-cli
 
 	Examples
-    $ tinder-cli --name=Jane
-    Hello, Jane
+		$ tinder-cli
 `);
 
 render(React.createElement(ui, cli.flags));
