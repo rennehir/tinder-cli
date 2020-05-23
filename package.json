@@ -10,11 +10,6 @@
 		"test": "xo && ava"
 	},
 	"main": "cli.js",
-	"files": [
-		"cli.js",
-		"ui.js",
-		"./src/*"
-	],
 	"dependencies": {
 		"axios": "^0.19.2",
 		"import-jsx": "^4.0.0",
