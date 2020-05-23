@@ -2,13 +2,17 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { Box, Text, Color, useInput } = require("ink");
-const { useState } = React;
+const { useState, useEffect } = React;
 const importJsx = require("import-jsx");
 
 const Image = importJsx("./image");
 
 const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	const [index, setIndex] = useState(0);
+
+	useEffect(() => {
+		setIndex(0);
+	}, [urls]);
 
 	useInput((input, key) => {
 		if (input === nextKey && index < urls.length - 1) {
@@ -20,13 +24,15 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	});
 
 	return (
-		<Box flexDirection="column" width={66}>
+		<Box flexDirection="column" width={56}>
 			<Box>
 				<Box width={3} justifyContent="center">
 					{index > 0 && <Text bold>{"<"}</Text>}
 				</Box>
 				<Box>
-					<Image url={urls[index].processedFiles[1].url} />
+					{index < urls.length && (
+						<Image width={50} url={urls[index].processedFiles[1].url} />
+					)}
 				</Box>
 				<Box width={3} justifyContent="center">
 					{index < urls.length - 1 && <Text bold>{">"}</Text>}
@@ -50,7 +56,7 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 ImageCarousel.propTypes = {
 	urls: PropTypes.array, // Syö profiilin photos arrayn
 	nextKey: PropTypes.string,
-	prevKey: PropTypes.string
+	prevKey: PropTypes.string,
 };
 
 module.exports = ImageCarousel;
