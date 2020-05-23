@@ -1,6 +1,9 @@
+const path = require("path");
 const jsonfile = require("jsonfile");
 
-const file = "/tmp/tcli-data.json";
+const file = path.join("/tmp", "tcli-data.json"); // "/tmp/tcli-data.json";
+
+console.log("PATH", file);
 
 const getHeaders = () => {
 	return jsonfile
