@@ -13,17 +13,19 @@ const Person = ({ profile }) => {
 				{profile.name}, {calculateAge(profile.birth_date)}
 			</Text>
 			<ImageCarousel urls={profile.photos} prevKey="q" nextKey="w" />
-			<Text>{profile.bio}</Text>
+			<Box width="100%" textWrap="wrap">
+				<Text>{profile.bio}</Text>
+			</Box>
 		</Box>
 	);
 };
 
-const calculateAge = (birthDate) => {
+const calculateAge = birthDate => {
 	return new Date().getFullYear() - new Date(birthDate).getFullYear();
 };
 
 Person.propTypes = {
-	profile: PropTypes.object,
+	profile: PropTypes.object
 };
 
 module.exports = Person;

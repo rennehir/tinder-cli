@@ -8,6 +8,7 @@ const axios = require("../axios");
 const getHeaders = require("../utils/get-headers");
 
 const Person = importJsx("../components/person");
+const Messages = importJsx("../components/messages");
 
 const { useState, useEffect } = React;
 
@@ -82,59 +83,41 @@ const Matches = ({ profile }) => {
 				Page {pageIndex + 1}/{pages.length}
 			</Text>
 			<Box marginY={1}>
-				{pages.length > 0 && (
-					<Tabs
-						flexDirection="column"
-						width={20}
-						marginRight={3}
-						keyMap={{ useTab: false, useNumbers: false }}
-						onChange={handleTabChange}
-					>
-						{pages[pageIndex].map((match) => (
-							<Tab key={match._id} name={match._id}>
-								{(match && match.person && match.person.name) || "Kukkuu"}
-							</Tab>
-						))}
-					</Tabs>
-				)}
-				{activeTab && matches.length > 0 && (
-					<>
-						{profileSwitcher === "profile" && (
-							<Person
-								profile={matches.find((m) => m._id === activeTab).person}
-							/>
-						)}
-						{profileSwitcher === "messages" && (
-							<Messages
-								profile={profile}
-								messages={matches.find((m) => m._id === activeTab).messages}
-							/>
-						)}
-					</>
-				)}
+				<Box>
+					{pages.length > 0 && (
+						<Tabs
+							flexDirection="column"
+							width={20}
+							marginRight={3}
+							keyMap={{ useTab: false, useNumbers: false }}
+							onChange={handleTabChange}
+						>
+							{pages[pageIndex].map((match) => (
+								<Tab key={match._id} name={match._id}>
+									{(match && match.person && match.person.name) || "Kukkuu"}
+								</Tab>
+							))}
+						</Tabs>
+					)}
+				</Box>
+				<Box width={80}>
+					{activeTab && matches.length > 0 && (
+						<>
+							{profileSwitcher === "profile" && (
+								<Person
+									profile={matches.find((m) => m._id === activeTab).person}
+								/>
+							)}
+							{profileSwitcher === "messages" && (
+								<Messages
+									profile={profile}
+									messages={matches.find((m) => m._id === activeTab).messages}
+								/>
+							)}
+						</>
+					)}
+				</Box>
 			</Box>
-		</Box>
-	);
-};
-
-const Messages = ({ messages, profile }) => {
-	const { _id: ownId } = profile;
-
-	return (
-		<Box flexDirection="column">
-			{messages.map((m) => (
-				<Message message={m.message} isOwnMessage={ownId === m.from} />
-			))}
-		</Box>
-	);
-};
-
-const Message = ({ message, isOwnMessage, matchName, sent_date }) => {
-	return (
-		<Box padding={1}>
-			<Color blue={isOwnMessage} yellow={!isOwnMessage}>
-				{message}
-			</Color>
 		</Box>
 	);
 };
