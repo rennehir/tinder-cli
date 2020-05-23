@@ -8,6 +8,8 @@ This project is created a a part of StUpiD hAcK 2020 by Junction.
 
 The goal of StUpiD hAcK 2020 was to create something extremely stupid. We thought that it would be stupid to create a CLI application for something that is normaly used on your mobile phone. Tinder was a great choice for this because it is normally so UI driven.
 
+CLIT (short for commandlineinterfacefortinder) makes dating possible from your terminal so its easier and efficient to do it while youre working at the same time.
+
 ## Install
 
 ```bash
