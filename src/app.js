@@ -32,7 +32,7 @@ const App = ({ profile }) => {
 			</Tabs>
 
 			{activeTab === "feed" && <Feed />}
-			{activeTab === "matches" && <Matches />}
+			{activeTab === "matches" && <Matches profile={profile} />}
 			{activeTab === "profile" && <Profile profile={profile} />}
 		</Box>
 	);
