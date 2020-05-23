@@ -13,6 +13,8 @@ const { useState, useEffect } = React;
 
 const Matches = ({ profile }) => {
 	const [matches, setMatches] = useState([]);
+	const [pages, setPages] = useState([]);
+	const [pageIndex, setPageIndex] = useState(0);
 	const [activeTab, setActiveTab] = useState(null);
 	const [profileSwitcher, setProfileSwitcher] = useState("profile");
 
@@ -26,6 +28,18 @@ const Matches = ({ profile }) => {
 					{ headers }
 				)
 				.then(({ data }) => {
+					const pages = data.matches.reduce((resultArray, item, index) => {
+						const chunkIndex = Math.floor(index / 10);
+
+						if (!resultArray[chunkIndex]) {
+							resultArray[chunkIndex] = []; // start a new chunk
+						}
+
+						resultArray[chunkIndex].push(item);
+
+						return resultArray;
+					}, []);
+					setPages(pages);
 					setMatches(data.matches);
 					setActiveTab(data.matches[0]._id);
 				});
@@ -46,25 +60,46 @@ const Matches = ({ profile }) => {
 			// Go back to profile
 			setProfileSwitcher("profile");
 		}
+
+		if (input === "z") {
+			// Previous matches
+			if (pageIndex - 1 > 0) {
+				setPageIndex(pageIndex - 1);
+			}
+		}
+		if (input === "x") {
+			// Next matches
+			if (pageIndex + 1 < pages.length) {
+				setPageIndex(pageIndex + 1);
+			}
+		}
 	});
 
 	return (
 		<Box flexDirection="column" margin={3}>
 			<Text>Your matches</Text>
+			<Text>
+				Page {pageIndex + 1}/{pages.length}
+			</Text>
+			{pages.length > 0 && (
+				<Text>{JSON.stringify(pages[0].length, null, 2)}</Text>
+			)}
 			<Box marginY={1}>
-				<Tabs
-					flexDirection="column"
-					width={20}
-					marginRight={3}
-					keyMap={{ useTab: false, useNumbers: false }}
-					onChange={handleTabChange}
-				>
-					{matches.map((match) => (
-						<Tab key={match._id} name={match._id}>
-							{(match.person && match.person.name) || "Kukkuu"}
-						</Tab>
-					))}
-				</Tabs>
+				{pages.length > 0 && (
+					<Tabs
+						flexDirection="column"
+						width={20}
+						marginRight={3}
+						keyMap={{ useTab: false, useNumbers: false }}
+						onChange={handleTabChange}
+					>
+						{pages[pageIndex].map((match) => (
+							<Tab key={match._id} name={match._id}>
+								{(match && match.person && match.person.name) || "Kukkuu"}
+							</Tab>
+						))}
+					</Tabs>
+				)}
 				{activeTab && matches.length > 0 && (
 					<>
 						{profileSwitcher === "profile" && (
