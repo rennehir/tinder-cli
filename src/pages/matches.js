@@ -111,6 +111,7 @@ const Matches = ({ profile }) => {
 							{profileSwitcher === "messages" && (
 								<Messages
 									profile={profile}
+									match={matches.find((m) => m._id === activeTab).person}
 									messages={matches.find((m) => m._id === activeTab).messages}
 								/>
 							)}
