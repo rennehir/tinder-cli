@@ -10,22 +10,27 @@ const Person = ({ profile }) => {
 	return (
 		<Box flexDirection="column">
 			<Text>
-				{profile.name}, {calculateAge(profile.birth_date)}
+				{(profile && profile.name) || "Unknown"},{" "}
+				{profile && profile.birth_date
+					? calculateAge(profile.birth_date)
+					: "NaN"}
 			</Text>
-			<ImageCarousel urls={profile.photos} prevKey="q" nextKey="w" />
+			{profile && (
+				<ImageCarousel urls={profile.photos} prevKey="q" nextKey="w" />
+			)}
 			<Box width="100%" textWrap="wrap">
-				<Text>{profile.bio}</Text>
+				{profile && <Text>{profile.bio}</Text>}
 			</Box>
 		</Box>
 	);
 };
 
-const calculateAge = birthDate => {
+const calculateAge = (birthDate) => {
 	return new Date().getFullYear() - new Date(birthDate).getFullYear();
 };
 
 Person.propTypes = {
-	profile: PropTypes.object
+	profile: PropTypes.object,
 };
 
 module.exports = Person;

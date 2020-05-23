@@ -126,9 +126,24 @@ const Matches = ({ profile }) => {
 					{activeTab && matches.length > 0 && (
 						<>
 							{profileSwitcher === "profile" && (
-								<Person
-									profile={matches.find((m) => m._id === activeTab).person}
-								/>
+								<Box flexDirection="column">
+									<Text>
+										Matched{" "}
+										{Math.round(
+											(new Date().getTime() -
+												new Date(
+													matches.find((m) => m._id === activeTab).created_date
+												).getTime()) /
+												1000 /
+												60 /
+												60
+										)}{" "}
+										hours ago
+									</Text>
+									<Person
+										profile={matches.find((m) => m._id === activeTab).person}
+									/>
+								</Box>
 							)}
 							{profileSwitcher === "messages" && (
 								<Messages
