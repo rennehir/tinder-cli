@@ -1,0 +1,47 @@
+{
+	"CHANGE_PAGE": {
+		"key": "TAB",
+		"label": "CHANGE TAB",
+		"page": ["matches", "feed", "profile"]
+	},
+	"PREV_IMAGE": {
+		"key": "q",
+		"label": "PREVIOUS IMAGE",
+		"page": ["matches", "feed", "profile"]
+	},
+	"NEXT_IMAGE": {
+		"key": "w",
+		"label": "NEXT IMAGE",
+		"page": ["matches", "feed", "profile"]
+	},
+	"SHOW_MSG": {
+		"key": "m",
+		"label": "SHOW MESSAGES",
+		"page": ["matches"]
+	},
+	"SHOW_PERSON": {
+		"key": "p",
+		"label": "SHOW PERSON",
+		"page": ["matches"]
+	},
+	"LIKE": {
+		"key": "l",
+		"label": "LIKE",
+		"page": ["feed"]
+	},
+	"PASS": {
+		"key": "p",
+		"label": "PASS",
+		"page": ["feed"]
+	},
+	"PREV_MATCH_PAGE": {
+		"key": "z",
+		"label": "PREV MATCHES PAGE",
+		"page": ["matches"]
+	},
+	"NEXT_MATCH_PAGE": {
+		"key": "x",
+		"label": "NEXT MATCHES PAGE",
+		"page": ["matches"]
+	}
+}

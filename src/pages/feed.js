@@ -7,6 +7,8 @@ const axios = require("../../src/axios");
 
 const Person = importJsx("../components/person");
 
+const keys = require("../keymappings.json");
+
 const { useState, useEffect } = React;
 
 const Feed = () => {
@@ -68,10 +70,10 @@ const Feed = () => {
 	};
 
 	useInput((input, key) => {
-		if (!!currRec && input.toUpperCase() === "L") {
+		if (!!currRec && input === keys.LIKE.key) {
 			likeRec();
 		}
-		if (!!currRec && input.toUpperCase() === "P") {
+		if (!!currRec && input === keys.PASS.key) {
 			passRec();
 		}
 	});

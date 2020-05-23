@@ -8,6 +8,7 @@ const Feed = importJsx("./pages/feed");
 const Matches = importJsx("./pages/matches");
 const Profile = importJsx("./pages/profile");
 const Logo = importJsx("./components/logo");
+const Help = importJsx("./components/help");
 
 const { useState } = React;
 
@@ -34,6 +35,7 @@ const App = ({ profile }) => {
 			{activeTab === "feed" && <Feed />}
 			{activeTab === "matches" && <Matches profile={profile} />}
 			{activeTab === "profile" && <Profile profile={profile} />}
+			<Help activeTab={activeTab} />
 		</Box>
 	);
 };

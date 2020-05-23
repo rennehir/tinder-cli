@@ -5,6 +5,8 @@ const { Box, Text, Color, useInput } = require("ink");
 const { useState, useEffect } = React;
 const importJsx = require("import-jsx");
 
+const keys = require("../keymappings.json");
+
 const Image = importJsx("./image");
 
 const ImageCarousel = ({ urls, nextKey, prevKey }) => {
@@ -15,10 +17,10 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	}, [urls]);
 
 	useInput((input, key) => {
-		if (input === nextKey && index < urls.length - 1) {
+		if (input === keys.NEXT_IMAGE.key && index < urls.length - 1) {
 			setIndex(index + 1);
 		}
-		if (input === prevKey && index > 0) {
+		if (input === keys.PREV_IMAGE.key && index > 0) {
 			setIndex(index - 1);
 		}
 	});
