@@ -83,37 +83,40 @@ const Matches = ({ profile }) => {
 				Page {pageIndex + 1}/{pages.length}
 			</Text>
 			<Box marginY={1}>
-				{pages.length > 0 && (
-					<Tabs
-						flexDirection="column"
-						width={20}
-						marginRight={5}
-						keyMap={{ useTab: false, useNumbers: false }}
-						onChange={handleTabChange}
-					>
-						{pages[pageIndex].map((match) => (
-							<Tab key={match._id} name={match._id}>
-								{(match && match.person && match.person.name) || "Kukkuu"}
-							</Tab>
-						))}
-					</Tabs>
-				)}
-				{activeTab && matches.length > 0 && (
-					<>
-						{profileSwitcher === "profile" && (
-							<Person
-								profile={matches.find((m) => m._id === activeTab).person}
-							/>
-						)}
-						{profileSwitcher === "messages" && (
-							<Messages
-								profile={profile}
-								match={matches.find((m) => m._id === activeTab).person}
-								messages={matches.find((m) => m._id === activeTab).messages}
-							/>
-						)}
-					</>
-				)}
+				<Box>
+					{pages.length > 0 && (
+						<Tabs
+							flexDirection="column"
+							width={20}
+							marginRight={3}
+							keyMap={{ useTab: false, useNumbers: false }}
+							onChange={handleTabChange}
+						>
+							{pages[pageIndex].map((match) => (
+								<Tab key={match._id} name={match._id}>
+									{(match && match.person && match.person.name) || "Kukkuu"}
+								</Tab>
+							))}
+						</Tabs>
+					)}
+				</Box>
+				<Box width={80}>
+					{activeTab && matches.length > 0 && (
+						<>
+							{profileSwitcher === "profile" && (
+								<Person
+									profile={matches.find((m) => m._id === activeTab).person}
+								/>
+							)}
+							{profileSwitcher === "messages" && (
+								<Messages
+									profile={profile}
+									messages={matches.find((m) => m._id === activeTab).messages}
+								/>
+							)}
+						</>
+					)}
+				</Box>
 			</Box>
 		</Box>
 	);
