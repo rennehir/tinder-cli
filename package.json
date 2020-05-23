@@ -9,9 +9,11 @@
 	"scripts": {
 		"test": "xo && ava"
 	},
+	"main": "cli.js",
 	"files": [
 		"cli.js",
-		"ui.js"
+		"ui.js",
+		"./src/*"
 	],
 	"dependencies": {
 		"axios": "^0.19.2",
