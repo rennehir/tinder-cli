@@ -1,7 +1,7 @@
 "use strict";
 const React = require("react");
 const PropTypes = require("prop-types");
-const { Box, Text, useInput } = require("ink");
+const { Box, Text, Color, useInput } = require("ink");
 const { useState } = React;
 const importJsx = require("import-jsx");
 
@@ -36,7 +36,9 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 				{urls.map((val, ind) => {
 					return (
 						<Box key={ind} width={3} justifyContent="center">
-							<Text bold={ind == index}>o</Text>
+							<Text bold={ind == index}>
+								<Color hex={ind == index ? "#FF69B4" : "#783756"}>o</Color>
+							</Text>
 						</Box>
 					);
 				})}
@@ -48,7 +50,7 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 ImageCarousel.propTypes = {
 	urls: PropTypes.array, // Syö profiilin photos arrayn
 	nextKey: PropTypes.string,
-	prevKey: PropTypes.string,
+	prevKey: PropTypes.string
 };
 
 module.exports = ImageCarousel;
