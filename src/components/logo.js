@@ -7,7 +7,7 @@ const asciiLogo =
 
 const Logo = () => {
 	return (
-		<Box flexDirection="column" marginX="1" marginY="3">
+		<Box flexDirection="column" marginX={1} marginY={3}>
 			<Color red>
 				<Text bold>{asciiLogo}</Text>
 			</Color>
