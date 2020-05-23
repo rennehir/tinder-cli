@@ -1,6 +1,6 @@
 {
 	"name": "@rennehir/tinder-cli",
-	"version": "0.1.2",
+	"version": "1.0.0",
 	"license": "MIT",
 	"bin": "cli.js",
 	"engines": {
