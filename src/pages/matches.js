@@ -8,6 +8,7 @@ const axios = require("../axios");
 const getHeaders = require("../utils/get-headers");
 
 const Person = importJsx("../components/person");
+const Messages = importJsx("../components/messages");
 
 const { useState, useEffect } = React;
 
@@ -86,7 +87,7 @@ const Matches = ({ profile }) => {
 					<Tabs
 						flexDirection="column"
 						width={20}
-						marginRight={3}
+						marginRight={5}
 						keyMap={{ useTab: false, useNumbers: false }}
 						onChange={handleTabChange}
 					>
@@ -107,34 +108,13 @@ const Matches = ({ profile }) => {
 						{profileSwitcher === "messages" && (
 							<Messages
 								profile={profile}
+								match={matches.find((m) => m._id === activeTab).person}
 								messages={matches.find((m) => m._id === activeTab).messages}
 							/>
 						)}
 					</>
 				)}
 			</Box>
-		</Box>
-	);
-};
-
-const Messages = ({ messages, profile }) => {
-	const { _id: ownId } = profile;
-
-	return (
-		<Box flexDirection="column">
-			{messages.map((m) => (
-				<Message message={m.message} isOwnMessage={ownId === m.from} />
-			))}
-		</Box>
-	);
-};
-
-const Message = ({ message, isOwnMessage, matchName, sent_date }) => {
-	return (
-		<Box padding={1}>
-			<Color blue={isOwnMessage} yellow={!isOwnMessage}>
-				{message}
-			</Color>
 		</Box>
 	);
 };
