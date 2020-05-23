@@ -14,14 +14,14 @@
 		"label": "NEXT IMAGE",
 		"page": ["matches", "feed", "profile"]
 	},
-	"SHOW_MSG": {
+	"MSG": {
 		"key": "m",
-		"label": "SHOW MESSAGES",
+		"label": "MESSAGING",
 		"page": ["matches"]
 	},
 	"SHOW_PERSON": {
 		"key": "p",
-		"label": "SHOW PERSON",
+		"label": "SHOW PROFILE",
 		"page": ["matches"]
 	},
 	"LIKE": {
@@ -42,6 +42,11 @@
 	"NEXT_MATCH_PAGE": {
 		"key": "x",
 		"label": "NEXT MATCHES PAGE",
+		"page": ["matches"]
+	},
+	"REFRESH": {
+		"key": "r",
+		"label": "REFRESH",
 		"page": ["matches"]
 	}
 }

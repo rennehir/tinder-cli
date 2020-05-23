@@ -10,6 +10,8 @@ const getHeaders = require("../utils/get-headers");
 const Person = importJsx("../components/person");
 const Messages = importJsx("../components/messages");
 
+const keys = require("../keymappings.json");
+
 const { useState, useEffect } = React;
 
 const Matches = ({ profile }) => {
@@ -66,28 +68,28 @@ const Matches = ({ profile }) => {
 
 	useInput((input, key) => {
 		if (isListeningNavigation) {
-			if (input === "m") {
+			if (input === keys.MSG.key) {
 				// Enter messages
 				setProfileSwitcher("messages");
 			}
-			if (input === "p") {
+			if (input === keys.SHOW_PERSON.key) {
 				// Go back to profile
 				setProfileSwitcher("profile");
 			}
 
-			if (input === "z") {
+			if (input === keys.PREV_MATCH_PAGE.key) {
 				// Previous matches
 				if (pageIndex - 1 >= 0) {
 					setPageIndex(pageIndex - 1);
 				}
 			}
-			if (input === "x") {
+			if (input === keys.NEXT_MATCH_PAGE.key) {
 				// Next matches
 				if (pageIndex + 1 < pages.length) {
 					setPageIndex(pageIndex + 1);
 				}
 			}
-			if (input === "r") {
+			if (input === keys.REFRESH.key) {
 				// Get updates / refresh
 				getUpdates(activeTab);
 			}
