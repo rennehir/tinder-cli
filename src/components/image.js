@@ -8,8 +8,14 @@ const terminalArt = require("terminal-art");
 const ERROR_TITS_URL =
 	"http://www.sexytitflash.com/bigimages/very%20big%20tits%2092619412%20153.jpg";
 
-const Image = ({ url, width }) => {
+const VIEWPORT_RATIO = 1.25;
+
+const Image = ({ url, width, ratio }) => {
 	const [content, setContent] = useState(null);
+
+	const height = ratio * width;
+	const viewportHeight = VIEWPORT_RATIO * width;
+	const viewportHeightDiff = parseInt(viewportHeight - height);
 
 	const img = terminalArt
 		.toAnsii(url, {
@@ -34,7 +40,15 @@ const Image = ({ url, width }) => {
 	return (
 		<>
 			{content ? (
-				<Box>{content}</Box>
+				<Box flexDirection="column">
+					{viewportHeightDiff > 0 && (
+						<Box height={viewportHeightDiff / 4}></Box>
+					)}
+					<Box>{content}</Box>
+					{viewportHeightDiff > 0 && (
+						<Box height={viewportHeightDiff / 4}></Box>
+					)}
+				</Box>
 			) : (
 				<Box width={width} height={width * 1.25}>
 					Loading...
@@ -47,6 +61,7 @@ const Image = ({ url, width }) => {
 Image.propTypes = {
 	url: PropTypes.string,
 	width: PropTypes.number,
+	ratio: PropTypes.number,
 };
 
 module.exports = Image;
