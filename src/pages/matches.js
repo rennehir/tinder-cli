@@ -63,7 +63,7 @@ const Matches = ({ profile }) => {
 
 		if (input === "z") {
 			// Previous matches
-			if (pageIndex - 1 > 0) {
+			if (pageIndex - 1 >= 0) {
 				setPageIndex(pageIndex - 1);
 			}
 		}
