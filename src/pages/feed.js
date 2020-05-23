@@ -13,6 +13,7 @@ const Feed = () => {
 	const [loading, setLoading] = useState(true);
 	const [recs, setRecs] = useState();
 	const [currRec, setCurrRec] = useState();
+	const [match, setMatch] = useState(false);
 
 	const getRecs = async () => {
 		const headers = await getHeaders();
@@ -55,6 +56,10 @@ const Feed = () => {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
+					if (result.match) {
+						setMatch(!match);
+						setTimeout(setMatch(!match), 5000);
+					}
 				}
 			})
 			.catch((e) => {
@@ -82,6 +87,7 @@ const Feed = () => {
 				<>
 					<Person profile={currRec} />
 					<Text>"P to pass ||| L to like"</Text>
+					{match && <Text>It's a match!</Text>}
 				</>
 			)}
 		</Box>

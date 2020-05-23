@@ -1,7 +1,7 @@
 "use strict";
 const React = require("react");
 const PropTypes = require("prop-types");
-const { Box, Text, useInput } = require("ink");
+const { Box, Text, Color, useInput } = require("ink");
 const { useState, useEffect } = React;
 const importJsx = require("import-jsx");
 
@@ -42,7 +42,9 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 				{urls.map((val, ind) => {
 					return (
 						<Box key={ind} width={3} justifyContent="center">
-							<Text bold={ind == index}>o</Text>
+							<Text bold={ind == index}>
+								<Color hex={ind == index ? "#FF69B4" : "#783756"}>o</Color>
+							</Text>
 						</Box>
 					);
 				})}
