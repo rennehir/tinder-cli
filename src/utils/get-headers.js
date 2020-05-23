@@ -3,8 +3,6 @@ const jsonfile = require("jsonfile");
 
 const file = path.join("/tmp", "tcli-data.json"); // "/tmp/tcli-data.json";
 
-console.log("PATH", file);
-
 const getHeaders = () => {
 	return jsonfile
 		.readFile(file, { throws: false })
