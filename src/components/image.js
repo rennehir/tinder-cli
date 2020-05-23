@@ -8,34 +8,45 @@ const terminalArt = require("terminal-art");
 const ERROR_TITS_URL =
 	"http://www.sexytitflash.com/bigimages/very%20big%20tits%2092619412%20153.jpg";
 
-const Image = ({ url }) => {
-	const [content, setContent] = useState("Loading image...");
+const Image = ({ url, width }) => {
+	const [content, setContent] = useState(null);
 
 	const img = terminalArt
 		.toAnsii(url, {
-			maxCharWidth: 60 // my terminal is only 20 characters wide
+			maxCharWidth: width,
 		})
-		.then(data => {
+		.then((data) => {
 			setContent(data);
 		})
-		.catch(error => {
+		.catch((error) => {
 			const tits = terminalArt
 				.toAnsii(ERROR_TITS_URL, {
-					maxCharWidth: 60
+					maxCharWidth: width,
 				})
-				.then(data => {
+				.then((data) => {
 					setContent(data);
 				})
-				.catch(err => {
-					setContent("Error");
+				.catch((err) => {
+					setContent(null);
 				});
 		});
 
-	return <Box>{content}</Box>;
+	return (
+		<>
+			{content ? (
+				<Box>{content}</Box>
+			) : (
+				<Box width={width} height={width * 1.25}>
+					Loading...
+				</Box>
+			)}
+		</>
+	);
 };
 
 Image.propTypes = {
-	url: PropTypes.string
+	url: PropTypes.string,
+	width: PropTypes.number,
 };
 
 module.exports = Image;
