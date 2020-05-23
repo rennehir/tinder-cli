@@ -6,6 +6,7 @@ const getHeaders = require("../utils/get-headers");
 const axios = require("../../src/axios");
 
 const Person = importJsx("../components/person");
+const Gz = importJsx("../components/gz");
 
 const keys = require("../keymappings.json");
 
@@ -58,9 +59,9 @@ const Feed = () => {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
-					if (result.match) {
-						setMatch(!match);
-						setTimeout(setMatch(!match), 5000);
+					if (!result.match) {
+						setMatch(true);
+						setTimeout(() => setMatch(false), 5000);
 					}
 				}
 			})
@@ -89,7 +90,7 @@ const Feed = () => {
 				<>
 					<Person profile={currRec} />
 					<Text>"P to pass ||| L to like"</Text>
-					{match && <Text>It's a match!</Text>}
+					{match ? <Gz /> : null}
 				</>
 			)}
 		</Box>

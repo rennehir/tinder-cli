@@ -2,11 +2,12 @@
 const React = require("react");
 const { Box, Text } = require("ink");
 const { UncontrolledTextInput } = require("ink-text-input");
+const path = require("path");
 const jsonfile = require("jsonfile");
 
 const axios = require("../axios");
 
-const file = "/tmp/tcli-data.json";
+const file = path.join("tmp", "tcli-data.json"); // "/tmp/tcli-data.json";
 
 const { useState } = React;
 
