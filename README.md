@@ -34,9 +34,8 @@ $ tinder-cli --help
 
 ## Built With
 
-- Python
-- OpenCV
-- lots of cofveve
+- ink - https://github.com/vadimdemedes/ink/
+- Tinder API - unofficial docs here: https://github.com/fbessez/Tinder
 
 ## Authors
 
