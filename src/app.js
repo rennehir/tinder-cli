@@ -7,6 +7,7 @@ const { Tabs, Tab } = require("ink-tab");
 const Feed = importJsx("./pages/feed");
 const Matches = importJsx("./pages/matches");
 const Profile = importJsx("./pages/profile");
+const Logo = importJsx("./components/logo");
 
 const { useState } = React;
 
@@ -23,6 +24,7 @@ const App = ({ profile }) => {
 
 	return (
 		<Box flexDirection="column">
+			<Logo />
 			<Tabs onChange={handleTabChange}>
 				<Tab name="feed">Feed</Tab>
 				<Tab name="matches">Matches</Tab>
