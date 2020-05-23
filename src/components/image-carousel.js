@@ -24,18 +24,19 @@ const ImageCarousel = ({ urls, nextKey, prevKey }) => {
 	});
 
 	return (
-		<Box flexDirection="column" width={56}>
+		<Box flexDirection="column" width={56} paddingLeft={3} paddingRight={3}>
 			<Box>
-				<Box width={3} justifyContent="center">
-					{index > 0 && <Text bold>{"<"}</Text>}
-				</Box>
 				<Box>
 					{index < urls.length && (
-						<Image width={50} url={urls[index].processedFiles[1].url} />
+						<Image
+							width={50}
+							url={urls[index].processedFiles[1].url}
+							ratio={
+								urls[index].processedFiles[1].height /
+								urls[index].processedFiles[1].width
+							}
+						/>
 					)}
-				</Box>
-				<Box width={3} justifyContent="center">
-					{index < urls.length - 1 && <Text bold>{">"}</Text>}
 				</Box>
 			</Box>
 			<Box justifyContent="center">
