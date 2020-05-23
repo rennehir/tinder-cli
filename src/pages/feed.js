@@ -59,7 +59,7 @@ const Feed = () => {
 					setLoading(true);
 					setCurrRec(undefined);
 					getRecs();
-					if (!result.match) {
+					if (result.match) {
 						setMatch(true);
 						setTimeout(() => setMatch(false), 5000);
 					}
@@ -89,7 +89,6 @@ const Feed = () => {
 			{recs && currRec && (
 				<>
 					<Person profile={currRec} />
-					<Text>"P to pass ||| L to like"</Text>
 					{match ? <Gz /> : null}
 				</>
 			)}
