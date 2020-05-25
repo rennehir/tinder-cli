@@ -7,7 +7,7 @@ const jsonfile = require("jsonfile");
 
 const axios = require("../axios");
 
-const file = path.join("tmp", "tcli-data.json"); // "/tmp/tcli-data.json";
+const file = path.join("/tmp", "tcli-data.json");
 
 const { useState } = React;
 
